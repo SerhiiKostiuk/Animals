@@ -16,7 +16,6 @@ struct AnimalCategoryView: View {
     //MARK: - Initializer
     init(model: AnimalDTO) {
         self.model = model
-       
     }
 
     var body: some View {
@@ -30,14 +29,16 @@ struct AnimalCategoryView: View {
                         .frame(width: 121, height: 90)
                 }
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(width: 121, height: 90)
+                .clipped()
                 .padding(.vertical, 5)
 
             VStack(alignment: .leading, spacing: 0) {
                 Text(model.title)
                     .font(.system(size: 16))
                     .foregroundColor(.black)
+
                 Text(model.description)
                     .font(.system(size: 12))
                     .foregroundColor(.black.opacity(0.5))
@@ -52,18 +53,18 @@ struct AnimalCategoryView: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top], 10)
             .padding(.bottom, 7)
 
-        }
-        .background {
-            Color.white
         }
         .padding(.leading, 10)
         .padding(.trailing, 3)
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: 100)
+        .background {
+            Color.white
+        }
         .overlay {
             if model.contentType == .comingSoon {
                 ZStack(alignment: .trailing) {

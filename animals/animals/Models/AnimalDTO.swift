@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import RealmSwift
 
-enum AnimalDTOStatus: String, Codable {
+enum AnimalDTOStatus: String, Codable, PersistableEnum {
     case free
     case paid
 }
@@ -19,6 +20,8 @@ struct AnimalDTO: Codable {
     let status: AnimalDTOStatus
     let order: Int
     let facts: [FactDTO]?
+
+    let id = UUID().uuidString
 
     enum CodingKeys: String, CodingKey {
         case title
@@ -39,7 +42,7 @@ enum ContentStatus {
 extension AnimalDTO {
 
     var contentType: ContentStatus {
-        if facts == nil {
+        if facts == nil || facts?.count == 0 {
             return .comingSoon
         } else {
             switch status {
